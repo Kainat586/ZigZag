@@ -1,0 +1,59 @@
+/* src/components/Navbar.css */
+.navbar {
+  background-color: #121212;
+    color: #fff;
+    padding: 17px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #282828;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 220px;
+}
+
+.navbar-logo {
+  margin: 0;
+  font-size: 20px;
+  color: #1db954;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #282828;
+  color: #fff;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  background-color: #282828;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+.navbar-search input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+  width: 200px;
+}
+.navbar-search input::placeholder {
+  color: #b3b3b3;
+}

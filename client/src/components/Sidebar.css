@@ -1,0 +1,30 @@
+/* src/components/Sidebar.css */
+.sidebar {
+  width: 180px;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  padding: 20px;
+  position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar li {
+  margin: 20px 0;
+  cursor: pointer;
+}
+.sidebar li:hover {
+  color: #1db954;
+}
+.sidebar li.active {
+  color: #1db954;
+  font-weight: bold;
+}

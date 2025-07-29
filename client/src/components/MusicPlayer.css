@@ -1,0 +1,102 @@
+.music-player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  border-top: 1px solid #444;
+  z-index: 1000;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.3);
+}
+
+.music-player img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.music-player .info {
+  flex: 1;
+}
+
+.music-player h4 {
+  margin: 0;
+  font-size: 16px;
+  color: white;
+}
+
+.music-player p {
+  margin: 4px 0;
+  color: #ccc;
+}
+
+.music-player audio {
+  width: 100%;
+}
+.now-playing {
+  display: flex;
+  align-items: center;
+  min-width: 220px;
+  gap: 16px;
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: center;
+  flex: 1;
+}
+.player-seek {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 32px;
+}
+.player-seek-bar {
+  width: 100%;
+  height: 6px;
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.player-seek-progress {
+  height: 100%;
+  background: #1db954;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.2s;
+}
+.icon-button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.play-icon {
+  background: #1db954;
+  color: #fff;
+}
+.icon-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.icon-button:hover:not(:disabled) {
+  transform: scale(1.12);
+  filter: brightness(1.2);
+}
