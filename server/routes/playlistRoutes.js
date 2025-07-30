@@ -18,20 +18,35 @@ router.post('/create', async (req, res) => {
     res.status(500).json({ error: 'Failed to create playlist' });
   }
 });
+// Example route: POST /api/playlists/add-to-playlist
 router.post('/add-to-playlist', async (req, res) => {
   const { playlistId, songId } = req.body;
 
   try {
     const playlist = await Playlist.findById(playlistId);
+    if (!playlist) return res.status(404).send('Playlist not found');
+
+    // Avoid duplicates
     if (!playlist.songs.includes(songId)) {
       playlist.songs.push(songId);
-      await playlist.save();
     }
-    res.json({ success: true, message: 'Song added to playlist' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to add song to playlist' });
+
+    // If no coverImage, set it using the song's imagePath
+    if (!playlist.coverImage) {
+      const song = await Song.findById(songId);
+      if (song && song.imagePath) {
+        playlist.coverImage = `http://localhost:5000/${song.imagePath}`;
+      }
+    }
+
+    await playlist.save();
+    res.status(200).json(playlist);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
   }
 });
+
 // GET ALL
 router.get('/:id/songs', async (req, res) => {
   try {
@@ -66,12 +81,24 @@ router.put('/:id/remove-song', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const playlists = await Playlist.find().sort({ createdAt: -1 });
-    res.json(playlists);
+    const playlists = await Playlist.find().populate('songs').sort({ createdAt: -1 });
+
+    const modifiedPlaylists = playlists.map(playlist => {
+      const lastSong = playlist.songs.length > 0 ? playlist.songs[playlist.songs.length - 1] : null;
+      return {
+        _id: playlist._id,
+        name: playlist.name,
+        coverImage: lastSong ? lastSong.imagePath : null, // 👈 show latest song image
+        songsCount: playlist.songs.length
+      };
+    });
+
+    res.json(modifiedPlaylists);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch playlists' });
   }
 });
+
 
 // GET songs for a specific playlist
 

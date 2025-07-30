@@ -65,6 +65,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve songs' });
   }
 });
+router.put('/favourites/toggle', async (req, res) => {
+  try {
+    const { songId } = req.body;
+    const song = await Song.findById(songId);
+    if (!song) return res.status(404).json({ error: 'Song not found' });
+
+    song.isFavourite = !song.isFavourite;
+    await song.save();
+
+    res.json({ message: song.isFavourite ? 'Marked as favourite' : 'Removed from favourites' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to toggle favourite' });
+  }
+});
+
 router.put('/favourites/add', async (req, res) => {
   try {
     const { songId } = req.body;

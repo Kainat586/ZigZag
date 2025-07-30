@@ -1,15 +1,21 @@
 // src/components/Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import './Navbar.css';
 
-const Navbar = ({ onUploadClick, onCreatePlaylistClick }) => {
+const Navbar = ({ onUploadClick, onCreatePlaylistClick, onSearch }) => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h1 className="navbar-logo">🎵 Spotify Clone</h1>
-        <Link to="/" className="nav-link">Home</Link>
+        <div className="navbar-search">
+          <input
+            type="text"
+            placeholder="Search songs..."
+            onChange={(e) => onSearch(e.target.value)}
+          />
+        </div>
       </div>
+
 
       <div className="navbar-right">
         <button className="upload-btn" onClick={onUploadClick}>Upload Song</button>

@@ -61,6 +61,7 @@ const MusicPlayer = ({ song }) => {
           <strong style={{ color: '#fff' }}>{song.title}</strong>
           <p style={{ color: '#aaa', margin: 0 }}>{song.artist}</p>
         </div>
+        
       </div>
       <div className="player-controls">
         <button className="icon-button" title="Previous" disabled><FaStepBackward /></button>
